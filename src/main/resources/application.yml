@@ -13,7 +13,6 @@ spring:
   jpa:
     open-in-view: true
     defer-datasource-initialization: true
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create
   sql:
@@ -27,3 +26,9 @@ server:
 springdoc:
   swagger-ui:
     path: /doc.html
+application:
+  version: 0.0.1
+  security:
+    jwt:
+      secret-key: SecretKeyParaJWTDesafioNeoris
+      expiration: 10800000
