@@ -6,10 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.Valid;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.validation.Valid;
 import java.time.OffsetDateTime;
 
 /**
@@ -39,11 +39,6 @@ public class Usuario {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private OffsetDateTime fechaActualizacion;
 
-    public Usuario id(Integer id) {
-        this.id = id;
-        return this;
-    }
-
     /**
      * Get id
      *
@@ -57,13 +52,11 @@ public class Usuario {
         return id;
     }
 
-
     /**
      * Get username
      *
      * @return username
      */
-
     @Schema(name = "username", accessMode = Schema.AccessMode.READ_ONLY, example = "marcelo15",
             requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @JsonProperty("username")
@@ -76,7 +69,6 @@ public class Usuario {
      *
      * @return password
      */
-
     @Schema(name = "password", example = "12345", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @JsonProperty("password")
     public String getPassword() {
@@ -88,7 +80,6 @@ public class Usuario {
      *
      * @return nombre
      */
-
     @Schema(name = "nombre", example = "Marcelo", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @JsonProperty("nombre")
     public String getNombre() {
@@ -100,7 +91,6 @@ public class Usuario {
      *
      * @return apellido
      */
-
     @Schema(name = "apellido", example = "Cortinez", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @JsonProperty("apellido")
     public String getApellido() {
@@ -112,7 +102,6 @@ public class Usuario {
      *
      * @return correo
      */
-
     @Schema(name = "correo", example = "marcelo@marcelo.com", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @JsonProperty("correo")
     public String getCorreo() {
