@@ -29,12 +29,9 @@ Ejecutar en consola:
 mvn clean spring-boot:run
 ```
 En el navegador se puede utilizar la documentación de Swagger:
-```
-http://localhost:8080/swagger-ui.html
-```
+[localhost:8080/api/doc.html](http://localhost:8080/api/doc.html)
+
 Si fuera necesario revisar la base de datos generada, se debe acceder a:
-```
-http://localhost:8080/h2
-```
+[localhost:8080/api/h2](http://localhost:8080/api/h2)
 
 Para utilizar la API, se incluye la colección de Postman: Usuarios. Se debe importar también las variables de ambientes.
