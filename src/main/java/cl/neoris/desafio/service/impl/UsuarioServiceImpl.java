@@ -64,7 +64,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public AuthPost200Response login(UserDetails userDetails) {
         AuthPost200Response authPost200Response = new AuthPost200Response();
-        authPost200Response.token(jwtUtil.generateToken(userDetails));
+        authPost200Response.setToken(jwtUtil.generateToken(userDetails));
 
         return authPost200Response;
     }
