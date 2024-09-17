@@ -1,7 +1,6 @@
 package cl.neoris.desafio.repository;
 
 import cl.neoris.desafio.model.User;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
