@@ -2,14 +2,12 @@ package cl.neoris.desafio.util;
 
 import cl.neoris.desafio.exceptions.InvalidTokenException;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import javax.crypto.SecretKey;
 import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,7 +19,7 @@ import static org.mockito.Mockito.mock;
 class JwtUtilTest {
     private static final String TOKEN_1 =
             "eyJhbGciOiJIUzI1NiJ9" +
-                    ".eyJpc3MiOiJOZW9yaXMiLCJzdWIiOiJTYWx2YWRvci5BYmJvdHRAZ21haWwuY29tIiwiaWF0IjoxNzI2NTY0ODA2LCJleHAiOjE3MjY1NzU2MDZ9.T7by8fKtR_8-TtR4Pi2DdgJo1MmJtv-LCFCxctZPh8I";
+                    ".eyJpc3MiOiJOZW9yaXMiLCJzdWIiOiJMZW5vcmVfRGFyZTk2QHlhaG9vLmNvbSIsImlhdCI6MTcyNjU3MjU5OCwiZXhwIjoxNzI2NTgzMzk4fQ.kzl39h97oMLUUELmauwk_mcLJkEYmrww5v37gU1QbJs";
 
     @Autowired
     private JwtUtil jwtUtil;

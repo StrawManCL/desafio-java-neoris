@@ -22,7 +22,7 @@ El endpoint recibe un user con los campos "nombre", "correo", "contraseña", má
 ## Requerimientos técnicos
 - Se utiliza Java 21 para su ejecución.
 - Se debe contar con Maven para su compilación.
-- Se adjunta script de creación de tablas.
+- Se adjunta script de creación de tablas en src/main/resources/schema.sql
 ## Indicaciones de uso
 Ejecutar en consola:
 ```shell
