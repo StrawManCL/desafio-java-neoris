@@ -25,7 +25,7 @@ public record UserFullResponseDTO(
         @JsonProperty("password")
         String password,
 
-        @Schema(name = "phones", example = "[{\"number\": \"1234567\", \"citycode\": \"1\", \"contrycode\": \"57\"}]",
+        @Schema(name = "phones", example = "[{\"number\": \"1234567\", \"citycode\": \"1\", \"countrycode\": \"57\"}]",
                 requiredMode = Schema.RequiredMode.NOT_REQUIRED)
         @JsonProperty("phones")
         List<PhoneDTO> phones,
