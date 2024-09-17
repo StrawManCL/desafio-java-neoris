@@ -1,9 +1,14 @@
 package cl.neoris.desafio.util;
 
+import cl.neoris.desafio.exceptions.InvalidTokenException;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ClaimsBuilder;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,14 +25,13 @@ import java.util.function.Function;
 public class JwtUtil {
     public static final String TOKEN_HEADER = "Authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
-    @Value("${application.security.jwt.secret-key}")
-    private String SECRET_KEY;
+    private static final SecretKey SECRET_KEY = Jwts.SIG.HS256.key().build();
     @Value("${application.security.jwt.expiration}")
     private long ACCESS_TOKEN_VALIDITY;
 
-    public String generateToken(UserDetails user) {
+    public String generateToken(String user) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, user.getUsername());
+        return createToken(claims, user);
     }
 
     private String createToken(Map<String, Object> claims, String username) {
@@ -39,11 +43,11 @@ public class JwtUtil {
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY))
                 .and()
-                .signWith(getSignKey())
+                .signWith(SECRET_KEY)
                 .compact();
     }
 
-    public Boolean validateToken(String token, UserDetails user) {
+    public Boolean validateToken(String token, UserDetails user) throws InvalidTokenException {
         final String username = extractUsername(token);
         return (username.equals(user.getUsername()) && !isTokenExpired(token));
     }
@@ -52,29 +56,33 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    private SecretKey getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
-
-    public Date extractExpiration(String token) {
+    public Date extractExpiration(String token) throws ExpiredJwtException {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    public String extractUsername(String token) {
+    public String extractUsername(String token) throws InvalidTokenException {
         return extractClaim(token, Claims::getSubject);
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
+        try {
+            final Claims claims = extractAllClaims(token);
+            return claimsResolver.apply(claims);
+        } catch (InvalidTokenException e) {
+            log.error(e.getMessage());
+        }
+        return null;
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .verifyWith(getSignKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+        try {
+            return Jwts.parser()
+                    .verifyWith(SECRET_KEY)
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+        } catch (MalformedJwtException | SignatureException e) {
+            throw new InvalidTokenException(e.getMessage());
+        }
     }
 }

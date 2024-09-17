@@ -1,4 +1,4 @@
-package cl.neoris.desafio.filter;
+package cl.neoris.desafio.config;
 
 import cl.neoris.desafio.service.MyUserDetailsService;
 import cl.neoris.desafio.util.JwtUtil;
@@ -21,7 +21,7 @@ import java.io.IOException;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthFilter extends OncePerRequestFilter {
     private final MyUserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
 

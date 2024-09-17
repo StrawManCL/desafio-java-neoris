@@ -1,9 +1,9 @@
 package cl.neoris.desafio.config;
 
-import cl.neoris.desafio.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,7 +24,7 @@ public class SecurityConfig {
             "/swagger-ui/**",
             "/doc.html"
     };
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthFilter jwtAuthFilter;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -33,10 +33,13 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(WHITE_LIST_URL).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users")
+                        .permitAll()
+                        .requestMatchers(WHITE_LIST_URL)
+                        .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }

@@ -1,4 +1,4 @@
-package cl.neoris.desafio.api;
+package cl.neoris.desafio.util;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.context.request.NativeWebRequest;

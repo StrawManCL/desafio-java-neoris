@@ -4,7 +4,7 @@ Desarrollo de una aplicación que permita la creación de usuarios.
 Crear una API RESTful utilizando Spring Boot 3.x que gestione la creación de usuarios, aplicando buenas prácticas y utilizando las tecnologías especificadas.
 ## Funcionalidad Principal
 ### Registro
-El endpoint recibe un usuario con los campos "nombre", "correo", "contraseña", más un listado de objetos "teléfono", respetando el siguiente formato:
+El endpoint recibe un user con los campos "nombre", "correo", "contraseña", más un listado de objetos "teléfono", respetando el siguiente formato:
 ```json
 {
     "name": "Juan Rodriguez",

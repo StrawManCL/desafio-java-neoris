@@ -10,15 +10,15 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-  jpa:
-    open-in-view: true
-    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: create
   sql:
     init:
-      mode: always
+      mode: never
       encoding: UTF-8
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
 server:
   port: 8080
   servlet:
