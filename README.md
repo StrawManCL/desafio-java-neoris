@@ -14,7 +14,7 @@ El endpoint recibe un user con los campos "nombre", "correo", "contraseña", má
         {
             "number": "1234567",
             "citycode": "1",
-            "contrycode": "57"
+            "countrycode": "57"
         }
     ]
 }
@@ -34,4 +34,5 @@ En el navegador se puede utilizar la documentación de Swagger:
 Si fuera necesario revisar la base de datos generada, se debe acceder a:
 [localhost:8080/api/h2](http://localhost:8080/api/h2)
 
-Para utilizar la API, se incluye la colección de Postman: Usuarios. Se debe importar también las variables de ambientes.
+Para utilizar la API, se incluye la colección de Postman Usuarios (Usuarios.postman_collection.json).
+Se debe importar también las variables de ambientes (DEV.postman_environment.json)
