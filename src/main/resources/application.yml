@@ -12,13 +12,13 @@ spring:
     driver-class-name: org.h2.Driver
   sql:
     init:
-      mode: never
+      mode: always
       encoding: UTF-8
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
-    show-sql: true
+      ddl-auto: validate
+    show-sql: false
 server:
   port: 8080
   servlet:
@@ -28,7 +28,3 @@ springdoc:
     path: /doc.html
 application:
   version: 0.0.1
-  security:
-    jwt:
-      secret-key: SecretKeyParaJWTDesafioNeoris
-      expiration: 10800000

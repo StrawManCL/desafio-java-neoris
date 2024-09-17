@@ -7,7 +7,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +22,6 @@ public class JwtUtil {
     public static final String TOKEN_HEADER = "Authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
     private static final SecretKey SECRET_KEY = Jwts.SIG.HS256.key().build();
-    @Value("${application.security.jwt.expiration}")
-    private long ACCESS_TOKEN_VALIDITY;
 
     public String generateToken(String user) {
         Map<String, Object> claims = new HashMap<>();
@@ -32,6 +29,7 @@ public class JwtUtil {
     }
 
     private String createToken(Map<String, Object> claims, String username) {
+        long ACCESS_TOKEN_VALIDITY = 10800000;
         return Jwts.builder()
                 .claims()
                 .issuer("Neoris")
