@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 import java.util.UUID;
@@ -70,7 +68,8 @@ public interface UserApi {
     @Operation(operationId = "getUser", summary = "Obtiene los detalles de un usuario específico", tags = {"User"})
     @ApiResponse(responseCode = "200", description = "Detalles del usuario",
             content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = UserFullResponseDTO.class))})
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserFullResponseDTO.class))})
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping(value = "/users/{id}", produces = {"application/json"})
     default ResponseEntity<UserFullResponseDTO> getUser(

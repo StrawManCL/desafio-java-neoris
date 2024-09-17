@@ -3,8 +3,6 @@ package cl.neoris.desafio.service;
 import cl.neoris.desafio.dto.UserFullResponseDTO;
 import cl.neoris.desafio.dto.UserRequestDTO;
 import cl.neoris.desafio.dto.UserResponseDTO;
-import cl.neoris.desafio.dto.AuthPost200Response;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.Optional;
